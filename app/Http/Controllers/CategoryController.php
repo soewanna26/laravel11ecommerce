@@ -69,19 +69,6 @@ class CategoryController extends Controller
             return redirect()->back()->withInput()->with('error', 'Failed to created Category');
         }
     }
-    public function GenerateCategoryThumbnailsImage($image, $imageName)
-    {
-        $destinationPath = storage_path('app/public/categoryImage/categoryThumbnails');
-        // Ensure the directory exists
-        if (!File::exists($destinationPath)) {
-            File::makeDirectory($destinationPath, 0755, true);
-        }
-        $img = Image::read($image->path());
-        $img->cover(124, 124, "top");
-        $img->resize(124, 124, function ($constraint) {
-            $constraint->aspectRatio();
-        })->save($destinationPath . '/' . $imageName);
-    }
     /**
      * Display the specified resource.
      */
@@ -156,5 +143,19 @@ class CategoryController extends Controller
 
         $category->delete();
         return redirect()->back()->with('success', 'Category deleted successfully');
+    }
+
+    public function GenerateCategoryThumbnailsImage($image, $imageName)
+    {
+        $destinationPath = storage_path('app/public/categoryImage/categoryThumbnails');
+        // Ensure the directory exists
+        if (!File::exists($destinationPath)) {
+            File::makeDirectory($destinationPath, 0755, true);
+        }
+        $img = Image::read($image->path());
+        $img->cover(124, 124, "top");
+        $img->resize(540, 689, function ($constraint) {
+            $constraint->upsize();
+        })->save($destinationPath . '/' . $imageName);
     }
 }
