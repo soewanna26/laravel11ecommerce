@@ -121,7 +121,7 @@
                                     </a>
                                     <ul class="sub-menu">
                                         <li class="sub-menu-item">
-                                            <a href="orders.html" class="">
+                                            <a href="{{ route('admin.orders') }}" class="">
                                                 <div class="text">Orders</div>
                                             </a>
                                         </li>
@@ -475,6 +475,7 @@
     <script src="{{ asset('js/bootstrap-select.min.js') }}"></script>
     <script src="{{ asset('js/sweetalert.min.js') }}"></script>
     <script src="{{ asset('js/apexcharts/apexcharts.js') }}"></script>
+    <script src="{{ asset('assets/js/plugins/swiper.min.js') }}"></script>
     <script src="{{ asset('js/main.js') }}"></script>
     <script>
         (function($) {

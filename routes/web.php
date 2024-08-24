@@ -8,6 +8,7 @@ use App\Http\Controllers\Front\CartController;
 use App\Http\Controllers\Front\ShopController;
 use App\Http\Controllers\Front\WishlistController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserController;
 use App\Http\Middleware\AuthAdmin;
@@ -43,6 +44,9 @@ Route::get('/order-confirmation',[CartController::class,'order_confirmation'])->
 
 Route::middleware(['auth'])->group(function(){
     Route::get('/account-dashboard',[UserController::class,'index'])->name('user.index');
+    Route::get('/account-orders',[UserController::class,'orders'])->name('user.orders');
+    Route::get('/account-order/{order_id}/details',[UserController::class,'order_details'])->name('user.order.details');
+    Route::put('/account-order/order-cancel',[UserController::class,'order_cancel'])->name('user.order.cancel');
 });
 
 Route::middleware(['auth',AuthAdmin::class])->group(function(){
@@ -79,4 +83,9 @@ Route::middleware(['auth',AuthAdmin::class])->group(function(){
     Route::get('/admin/coupon/edit/{id}',[CouponController::class,'edit'])->name('admin.coupon.edit');
     Route::post('/admin/coupon/update/{id}',[CouponController::class,'update'])->name('admin.coupon.update');
     Route::delete('/admin/coupon/delete/{id}',[CouponController::class,'delete'])->name('admin.coupon.delete');
+
+    //Orders
+    Route::get('/admin/orders',[OrderController::class,'index'])->name('admin.orders');
+    Route::get('/admin/order/{order_id}/details',[OrderController::class,'order_details'])->name('admin.order.details');
+    Route::put('/admin/order/update-status',[OrderController::class,'update_order_status'])->name('admin.order.status.update');
 });
