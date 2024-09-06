@@ -14,14 +14,17 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+        $this->call([
+            MonthSeeder::class
+        ]);
         // User::factory(10)->create();
 
-        User::factory()->create([
-            'name' => 'Admin',
-            'email' => 'admin@gmail.com',
-            'utype' => 'ADM',
-            'mobile' => 1234567891,
-            'password' => Hash::make('password')
-        ]);
+        // User::factory()->create([
+        //     'name' => 'Admin',
+        //     'email' => 'admin@gmail.com',
+        //     'utype' => 'ADM',
+        //     'mobile' => 1234567891,
+        //     'password' => Hash::make('password')
+        // ]);
     }
 }
